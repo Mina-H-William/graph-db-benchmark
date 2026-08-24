@@ -4,35 +4,35 @@
     "status": "ok",
     "node_count": 11250,
     "relationship_count": 233031,
-    "load_time_seconds": 36.66704420000315,
-    "nodes_per_second": 306.81502273911224,
-    "relationships_per_second": 6355.325472348273
+    "load_time_seconds": 49.746758199995384,
+    "nodes_per_second": 226.14538930902725,
+    "relationships_per_second": 4684.345441428616
   },
   {
     "platform": "memgraph",
     "status": "ok",
     "node_count": 11250,
     "relationship_count": 233031,
-    "load_time_seconds": 7.318589900038205,
-    "nodes_per_second": 1537.1813633035063,
-    "relationships_per_second": 31840.96980195372
+    "load_time_seconds": 7.241922500077635,
+    "nodes_per_second": 1553.4549009436923,
+    "relationships_per_second": 32178.057690827518
   },
   {
     "platform": "cognodb",
     "status": "ok",
     "node_count": 11250,
     "relationship_count": 233031,
-    "load_time_seconds": 120.89599490002729,
-    "nodes_per_second": 93.05519185563574,
-    "relationships_per_second": 1927.5328367387247
+    "load_time_seconds": 119.95002240000758,
+    "nodes_per_second": 93.78906126823107,
+    "relationships_per_second": 1942.7341099019693
   },
   {
     "platform": "arangodb",
     "status": "ok",
     "node_count": 11250,
     "relationship_count": 233031,
-    "load_time_seconds": 29.78234519995749,
-    "nodes_per_second": 377.7405682617653,
-    "relationships_per_second": 7824.467765565105
+    "load_time_seconds": 28.364673200063407,
+    "nodes_per_second": 396.6201168845073,
+    "relationships_per_second": 8215.536218463432
   }
 ]

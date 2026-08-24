@@ -6,8 +6,14 @@
 #
 # FAIRNESS / RESOURCE PARITY
 # --------------------------
-# Every service below is capped to match CognoDB's free (c0) tier:
-#     0.5 vCPU, 256 MB RAM, 1 GB disk
+# NOTE: the assignment PDF states CognoDB's free tier as 0.5 vCPU / 256MB
+# RAM / 1GB disk, but the actual provisioned instance's dashboard shows
+# 512MB RAM. We match the REAL, observed instance spec (512MB) rather
+# than the PDF's stated figure, since that's what's actually being
+# benchmarked. This discrepancy is documented in the README.
+#
+# Every service below is capped to:
+#     0.5 vCPU, 512 MB RAM (matching CognoDB's actual dashboard spec)
 #
 # CPU + RAM limits are enforced by Docker (deploy.resources.limits, applied
 # by `docker compose up` even outside swarm mode on Compose V2).
@@ -17,6 +23,7 @@
 # caveat honestly in the README, per section 5.3 of the assignment.
 #
 # Secrets: passwords are read from a local .env file (see .env.example).
+# Never commit the real .env to the repo.
 #
 # Usage:
 #     docker compose up -d
@@ -25,22 +32,23 @@
 ########################################################################
 
 services:
+
   neo4j:
     image: neo4j:5.24-community
     container_name: bench-neo4j
     ports:
-      - "7474:7474" # HTTP browser UI
-      - "7687:7687" # Bolt
+      - "7474:7474"   # HTTP browser UI
+      - "7687:7687"   # Bolt
     environment:
       NEO4J_AUTH: "neo4j/${NEO4J_PASSWORD}"
-      NEO4J_server_memory_heap_max__size: "128m"
-      NEO4J_server_memory_pagecache_size: "64m"
+      NEO4J_server_memory_heap_max__size: "256m"
+      NEO4J_server_memory_pagecache_size: "128m"
       NEO4J_dbms_usage__report_enabled: "false"
     deploy:
       resources:
         limits:
           cpus: "0.5"
-          memory: 256M
+          memory: 512M
     volumes:
       - neo4j_data:/data
     healthcheck:
@@ -52,9 +60,9 @@ services:
   memgraph:
     image: memgraph/memgraph:2.18.1
     container_name: bench-memgraph
-    command: ["--memory-limit=200"] # MB, leaves headroom under the 256M container cap
+    command: ["--memory-limit=450"]   # MB, leaves headroom under the 512M container cap
     ports:
-      - "7688:7687" # Bolt (remapped host port; Neo4j already owns 7687)
+      - "7688:7687"   # Bolt (remapped host port; Neo4j already owns 7687)
     environment:
       MEMGRAPH_USER: "memgraph"
       MEMGRAPH_PASSWORD: "${MEMGRAPH_PASSWORD}"
@@ -62,7 +70,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 256M
+          memory: 512M
     volumes:
       - memgraph_data:/var/lib/memgraph
     healthcheck:
@@ -82,12 +90,11 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 256M
+          memory: 512M
     volumes:
       - arangodb_data:/var/lib/arangodb3
     healthcheck:
-      test:
-        ["CMD", "wget", "-q", "--spider", "http://localhost:8529/_api/version"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8529/_api/version"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -96,7 +103,7 @@ services:
     image: apache/age:release_PG16_1.5.0
     container_name: bench-age
     ports:
-      - "5433:5432" # remapped to avoid clashing with a local Postgres
+      - "5433:5432"   # remapped to avoid clashing with a local Postgres
     environment:
       POSTGRES_USER: "age"
       POSTGRES_PASSWORD: "${AGE_PASSWORD}"
@@ -105,7 +112,7 @@ services:
       resources:
         limits:
           cpus: "0.5"
-          memory: 256M
+          memory: 512M
     volumes:
       - age_data:/var/lib/postgresql/data
     healthcheck:

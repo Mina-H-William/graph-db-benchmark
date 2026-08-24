@@ -40,11 +40,11 @@ try:
 except Exception as e:
     print(f"[warn] arangodb adapter unavailable: {e}")
 
-try:
-    from adapters.age_db import AgeAdapter
-    ADAPTER_REGISTRY["age"] = AgeAdapter
-except Exception as e:
-    print(f"[warn] age adapter unavailable: {e}")
+# try:
+#     from adapters.age_db import AgeAdapter
+#     ADAPTER_REGISTRY["age"] = AgeAdapter
+# except Exception as e:
+#     print(f"[warn] age adapter unavailable: {e}")
 
 
 def load_one(name: str, adapter_cls) -> dict:
