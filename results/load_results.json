@@ -1,0 +1,38 @@
+[
+  {
+    "platform": "neo4j",
+    "status": "ok",
+    "node_count": 11250,
+    "relationship_count": 233031,
+    "load_time_seconds": 36.66704420000315,
+    "nodes_per_second": 306.81502273911224,
+    "relationships_per_second": 6355.325472348273
+  },
+  {
+    "platform": "memgraph",
+    "status": "ok",
+    "node_count": 11250,
+    "relationship_count": 233031,
+    "load_time_seconds": 7.318589900038205,
+    "nodes_per_second": 1537.1813633035063,
+    "relationships_per_second": 31840.96980195372
+  },
+  {
+    "platform": "cognodb",
+    "status": "ok",
+    "node_count": 11250,
+    "relationship_count": 233031,
+    "load_time_seconds": 120.89599490002729,
+    "nodes_per_second": 93.05519185563574,
+    "relationships_per_second": 1927.5328367387247
+  },
+  {
+    "platform": "arangodb",
+    "status": "ok",
+    "node_count": 11250,
+    "relationship_count": 233031,
+    "load_time_seconds": 29.78234519995749,
+    "nodes_per_second": 377.7405682617653,
+    "relationships_per_second": 7824.467765565105
+  }
+]

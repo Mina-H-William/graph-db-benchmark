@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+.env*
+
+data/raw/*
+data/trimmed/*
+
+cognodb-db-credentials*

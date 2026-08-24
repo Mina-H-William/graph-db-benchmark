@@ -1,0 +1,121 @@
+########################################################################
+# docker-compose.yml
+#
+# Spins up the 4 comparison graph databases (Neo4j, Memgraph, ArangoDB,
+# Apache AGE) that are benchmarked against CognoDB Cloud.
+#
+# FAIRNESS / RESOURCE PARITY
+# --------------------------
+# Every service below is capped to match CognoDB's free (c0) tier:
+#     0.5 vCPU, 256 MB RAM, 1 GB disk
+#
+# CPU + RAM limits are enforced by Docker (deploy.resources.limits, applied
+# by `docker compose up` even outside swarm mode on Compose V2).
+# Disk is NOT hard-capped by Docker in a portable way -- instead, disk
+# parity is enforced by using the identical ~3.6 MB trimmed dataset for
+# every platform, which comfortably fits 1 GB everywhere. Document this
+# caveat honestly in the README, per section 5.3 of the assignment.
+#
+# Secrets: passwords are read from a local .env file (see .env.example).
+#
+# Usage:
+#     docker compose up -d
+#     docker compose logs -f        # watch startup
+#     docker compose down -v        # tear down + wipe volumes
+########################################################################
+
+services:
+  neo4j:
+    image: neo4j:5.24-community
+    container_name: bench-neo4j
+    ports:
+      - "7474:7474" # HTTP browser UI
+      - "7687:7687" # Bolt
+    environment:
+      NEO4J_AUTH: "neo4j/${NEO4J_PASSWORD}"
+      NEO4J_server_memory_heap_max__size: "128m"
+      NEO4J_server_memory_pagecache_size: "64m"
+      NEO4J_dbms_usage__report_enabled: "false"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:7474"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  memgraph:
+    image: memgraph/memgraph:2.18.1
+    container_name: bench-memgraph
+    command: ["--memory-limit=200"] # MB, leaves headroom under the 256M container cap
+    ports:
+      - "7688:7687" # Bolt (remapped host port; Neo4j already owns 7687)
+    environment:
+      MEMGRAPH_USER: "memgraph"
+      MEMGRAPH_PASSWORD: "${MEMGRAPH_PASSWORD}"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - memgraph_data:/var/lib/memgraph
+    healthcheck:
+      test: ["CMD", "sh", "-c", "echo > /dev/tcp/localhost/7687"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  arangodb:
+    image: arangodb:3.12
+    container_name: bench-arangodb
+    ports:
+      - "8529:8529"
+    environment:
+      ARANGO_ROOT_PASSWORD: "${ARANGO_PASSWORD}"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - arangodb_data:/var/lib/arangodb3
+    healthcheck:
+      test:
+        ["CMD", "wget", "-q", "--spider", "http://localhost:8529/_api/version"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  age:
+    image: apache/age:release_PG16_1.5.0
+    container_name: bench-age
+    ports:
+      - "5433:5432" # remapped to avoid clashing with a local Postgres
+    environment:
+      POSTGRES_USER: "age"
+      POSTGRES_PASSWORD: "${AGE_PASSWORD}"
+      POSTGRES_DB: "graphbench"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    volumes:
+      - age_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U age -d graphbench"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  neo4j_data:
+  memgraph_data:
+  arangodb_data:
+  age_data:
