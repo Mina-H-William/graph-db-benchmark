@@ -110,9 +110,7 @@ class AgeAdapter(GraphDBAdapter):
                 self._load_node_batch(batch)
                 node_count += len(batch)
 
-        # index node_id BEFORE edges load -- see cypher_base.py for why this
-        # ordering matters (unindexed MATCH during edge creation is a full
-        # scan and can hang/OOM at this dataset size).
+        
         self._ensure_node_id_index()
 
         rel_count = 0

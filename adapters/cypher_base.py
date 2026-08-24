@@ -1,15 +1,3 @@
-"""
-adapters/cypher_base.py
-
-Shared implementation for every platform that speaks Cypher over Bolt:
-Neo4j, Memgraph, and CognoDB. They differ only in a few syntax details
-(index creation, a couple of function names), which subclasses override.
-
-Graph model used by every adapter for consistency:
-    (:User {node_id, public, gender, age, region, completion_percentage})
-    (:User)-[:FRIEND]->(:User)      -- directed, matches Pokec's original edges
-"""
-
 import csv
 import time
 from typing import Any, Dict, List
@@ -18,13 +6,12 @@ from neo4j import GraphDatabase
 
 from adapters.base import GraphDBAdapter, LoadResult
 
-BATCH_SIZE = 300  # kept small deliberately -- containers are capped to 256MB RAM,
-                   # and Neo4j's transaction memory pool (bounded by heap size)
-                   # can OOM on larger batches once relationships are involved
+BATCH_SIZE = 300 
+                   
 
 
 class CypherAdapter(GraphDBAdapter):
-    name = "cypher-base"  # overridden by subclasses
+    name = "cypher-base" 
 
     def __init__(self, uri: str, user: str, password: str):
         self.uri = uri
@@ -44,11 +31,6 @@ class CypherAdapter(GraphDBAdapter):
 
     def clear(self) -> None:
         with self.driver.session() as session:
-            # Small batch size deliberately -- on a 256MB-capped instance,
-            # DETACH DELETE on high-batch counts can exceed Neo4j's
-            # transaction memory pool when nodes carry many relationships
-            # (avg degree ~20 in this dataset -> a 5000-node batch can touch
-            # ~100k relationship deletions in one transaction and OOM).
             while True:
                 result = session.run(
                     "MATCH (n) WITH n LIMIT 500 DETACH DELETE n RETURN count(n) AS c"
@@ -85,7 +67,6 @@ class CypherAdapter(GraphDBAdapter):
 
         self._ensure_node_id_index()
 
-        # 2. Load relationships from edges.csv
         rel_count = 0
         with open(edges_path, newline="") as f:
             reader = csv.DictReader(f)
@@ -206,7 +187,7 @@ class CypherAdapter(GraphDBAdapter):
 
     def mixed_workload_op(self, op_seed: int, write_ratio: float) -> Any:
         is_write = (op_seed % 1000) / 1000.0 < write_ratio
-        node_id = op_seed % 11250  # bounded by trimmed node count; adjust if dataset size changes
+        node_id = op_seed % 11250  
         with self.driver.session() as session:
             if is_write:
                 query = """

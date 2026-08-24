@@ -35,8 +35,6 @@ class ArangoDBAdapter(GraphDBAdapter):
             self.db.create_collection("friend", edge=True)
 
     def close(self) -> None:
-        # python-arango keeps an HTTP session under the hood; nothing to
-        # explicitly close per-connection.
         pass
 
     def clear(self) -> None:
@@ -72,9 +70,7 @@ class ArangoDBAdapter(GraphDBAdapter):
                 users.insert_many(batch)
                 node_count += len(batch)
 
-        # node_id (_key) is indexed automatically -- edges below can be
-        # inserted directly by _from/_to without needing a lookup query,
-        # unlike the Cypher-based adapters which need MATCH.
+
         rel_count = 0
         with open(edges_path, newline="") as f:
             reader = csv.DictReader(f)
@@ -114,7 +110,6 @@ class ArangoDBAdapter(GraphDBAdapter):
 
     def create_indexes(self) -> None:
         users = self.db.collection("users")
-        # node_id is already indexed implicitly via _key (ArangoDB's primary index)
         users.add_persistent_index(fields=["gender"])
         users.add_persistent_index(fields=["age"])
         print(f"[{self.name}] indexed: users._key (primary index, = node_id), users.gender, users.age")
@@ -165,7 +160,7 @@ class ArangoDBAdapter(GraphDBAdapter):
 
     def mixed_workload_op(self, op_seed: int, write_ratio: float) -> Any:
         is_write = (op_seed % 1000) / 1000.0 < write_ratio
-        node_id = op_seed % 11250  # bounded by trimmed node count; adjust if dataset size changes
+        node_id = op_seed % 11250 
         users = self.db.collection("users")
         if is_write:
             doc = users.get(str(node_id))

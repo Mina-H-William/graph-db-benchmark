@@ -1,0 +1,99 @@
+{
+  "platform": "arangodb",
+  "latencies": {
+    "hop_1": {
+      "label": "1-hop traversal",
+      "p50_ms": 50.019,
+      "p95_ms": 59.438,
+      "mean_ms": 50.528,
+      "min_ms": 48.531,
+      "max_ms": 60.444,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "hop_2": {
+      "label": "2-hop traversal",
+      "p50_ms": 50.837,
+      "p95_ms": 62.097,
+      "mean_ms": 52.163,
+      "min_ms": 44.495,
+      "max_ms": 78.248,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "hop_3": {
+      "label": "3-hop traversal",
+      "p50_ms": 91.821,
+      "p95_ms": 957.269,
+      "mean_ms": 270.108,
+      "min_ms": 13.954,
+      "max_ms": 3774.722,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "point_lookup": {
+      "label": "point lookup",
+      "p50_ms": 1.383,
+      "p95_ms": 2.026,
+      "mean_ms": 1.455,
+      "min_ms": 1.272,
+      "max_ms": 2.911,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "filtered_lookup": {
+      "label": "filtered lookup",
+      "p50_ms": 50.014,
+      "p95_ms": 59.717,
+      "mean_ms": 50.597,
+      "min_ms": 48.918,
+      "max_ms": 60.351,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "aggregation": {
+      "label": "aggregation",
+      "p50_ms": 50.053,
+      "p95_ms": 58.427,
+      "mean_ms": 50.589,
+      "min_ms": 47.78,
+      "max_ms": 60.454,
+      "samples": 150,
+      "failed_iterations": 0
+    }
+  },
+  "mixed_workload": [
+    {
+      "concurrency": 1,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 1072,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 71.47,
+      "sample_errors": []
+    },
+    {
+      "concurrency": 10,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 6467,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 431.13,
+      "sample_errors": []
+    },
+    {
+      "concurrency": 40,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 6862,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 457.47,
+      "sample_errors": []
+    }
+  ],
+  "footprint": {
+    "documents_size_bytes": "not observable",
+    "memory_usage": "not observable"
+  },
+  "status": "ok"
+}

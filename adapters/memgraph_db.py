@@ -1,5 +1,3 @@
-"""adapters/memgraph_db.py"""
-
 import os
 from adapters.cypher_base import CypherAdapter
 
@@ -23,7 +21,6 @@ class MemgraphAdapter(CypherAdapter):
         print(f"[{self.name}] node_id index created (pre-edge-load)")
 
     def create_indexes(self) -> None:
-        # Memgraph's index syntax differs from Neo4j 5.x's "IF NOT EXISTS FOR" form.
         stmts = [
             "CREATE INDEX ON :User(node_id);",
             "CREATE INDEX ON :User(gender);",

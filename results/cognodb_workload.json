@@ -1,0 +1,105 @@
+{
+  "platform": "cognodb",
+  "latencies": {
+    "hop_1": {
+      "label": "1-hop traversal",
+      "p50_ms": 129.934,
+      "p95_ms": 131.177,
+      "mean_ms": 130.09,
+      "min_ms": 128.873,
+      "max_ms": 133.692,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "hop_2": {
+      "label": "2-hop traversal",
+      "p50_ms": 132.563,
+      "p95_ms": 153.474,
+      "mean_ms": 135.792,
+      "min_ms": 129.567,
+      "max_ms": 199.152,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "hop_3": {
+      "label": "3-hop traversal",
+      "p50_ms": 176.844,
+      "p95_ms": 1965.046,
+      "mean_ms": 605.161,
+      "min_ms": 128.648,
+      "max_ms": 7700.485,
+      "samples": 147,
+      "failed_iterations": 3
+    },
+    "point_lookup": {
+      "label": "point lookup",
+      "p50_ms": 129.431,
+      "p95_ms": 132.563,
+      "mean_ms": 129.799,
+      "min_ms": 128.527,
+      "max_ms": 133.37,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "filtered_lookup": {
+      "label": "filtered lookup",
+      "p50_ms": 140.753,
+      "p95_ms": 144.605,
+      "mean_ms": 140.94,
+      "min_ms": 138.167,
+      "max_ms": 151.778,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "aggregation": {
+      "label": "aggregation",
+      "p50_ms": 146.3,
+      "p95_ms": 150.046,
+      "mean_ms": 147.238,
+      "min_ms": 144.457,
+      "max_ms": 199.344,
+      "samples": 150,
+      "failed_iterations": 0
+    }
+  },
+  "mixed_workload": [
+    {
+      "concurrency": 1,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 110,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 7.33,
+      "sample_errors": []
+    },
+    {
+      "concurrency": 10,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 1079,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 71.93,
+      "sample_errors": []
+    },
+    {
+      "concurrency": 40,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 3452,
+      "total_errors": 17,
+      "throughput_ops_per_sec": 230.13,
+      "sample_errors": [
+        "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 12504 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 12504 modified concurrently}",
+        "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 21253 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 21253 modified concurrently}",
+        "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 11258 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 11258 modified concurrently}",
+        "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 21253 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 21253 modified concurrently}",
+        "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 20007 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 20007 modified concurrently}"
+      ]
+    }
+  ],
+  "footprint": {
+    "stored_size": "not observable",
+    "memory_usage": "not observable"
+  },
+  "status": "ok"
+}

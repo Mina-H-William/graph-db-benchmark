@@ -60,19 +60,9 @@ def compute_latency_stats(label: str, times_ms: List[float]) -> LatencyResult:
 class GraphDBAdapter(ABC):
     """
     Common interface implemented by every platform under test.
-
-    Design notes:
-    - Each "single op" method (hop_query, point_lookup, filtered_lookup,
-      aggregation, mixed_workload_op) performs exactly ONE query and does
-      NOT time itself -- benchmark/runner.py wraps calls with
-      time.perf_counter() so timing logic lives in one place and is
-      identical across platforms.
-    - sample_node_ids() lets the runner pick real, existing node ids to
-      query against, so every platform is queried against equivalent
-      "random start node" sets per section 5.2's traversal requirement.
     """
 
-    name: str  # e.g. "neo4j", "cognodb", "arangodb"
+    name: str
 
     @abstractmethod
     def connect(self) -> None: ...

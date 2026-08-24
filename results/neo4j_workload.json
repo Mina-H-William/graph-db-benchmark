@@ -1,0 +1,99 @@
+{
+  "platform": "neo4j",
+  "latencies": {
+    "hop_1": {
+      "label": "1-hop traversal",
+      "p50_ms": 1.229,
+      "p95_ms": 2.355,
+      "mean_ms": 2.055,
+      "min_ms": 1.071,
+      "max_ms": 69.515,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "hop_2": {
+      "label": "2-hop traversal",
+      "p50_ms": 1.6,
+      "p95_ms": 2.925,
+      "mean_ms": 1.994,
+      "min_ms": 1.136,
+      "max_ms": 16.936,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "hop_3": {
+      "label": "3-hop traversal",
+      "p50_ms": 4.644,
+      "p95_ms": 73.782,
+      "mean_ms": 14.625,
+      "min_ms": 1.53,
+      "max_ms": 253.251,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "point_lookup": {
+      "label": "point lookup",
+      "p50_ms": 1.709,
+      "p95_ms": 3.325,
+      "mean_ms": 2.436,
+      "min_ms": 1.125,
+      "max_ms": 47.779,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "filtered_lookup": {
+      "label": "filtered lookup",
+      "p50_ms": 3.515,
+      "p95_ms": 5.892,
+      "mean_ms": 3.785,
+      "min_ms": 2.504,
+      "max_ms": 7.789,
+      "samples": 150,
+      "failed_iterations": 0
+    },
+    "aggregation": {
+      "label": "aggregation",
+      "p50_ms": 5.758,
+      "p95_ms": 45.838,
+      "mean_ms": 11.068,
+      "min_ms": 4.039,
+      "max_ms": 99.001,
+      "samples": 150,
+      "failed_iterations": 0
+    }
+  },
+  "mixed_workload": [
+    {
+      "concurrency": 1,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 9012,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 600.8,
+      "sample_errors": []
+    },
+    {
+      "concurrency": 10,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 9425,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 628.33,
+      "sample_errors": []
+    },
+    {
+      "concurrency": 40,
+      "duration_seconds": 15,
+      "write_ratio": 0.2,
+      "total_ops": 10246,
+      "total_errors": 0,
+      "throughput_ops_per_sec": 683.07,
+      "sample_errors": []
+    }
+  ],
+  "footprint": {
+    "stored_size": "not observable (APOC not available)",
+    "memory_usage": "not observable"
+  },
+  "status": "ok"
+}

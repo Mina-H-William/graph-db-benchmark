@@ -22,7 +22,7 @@
 # every platform, which comfortably fits 1 GB everywhere. Document this
 # caveat honestly in the README, per section 5.3 of the assignment.
 #
-# Secrets: passwords are read from a local .env file (see .env.example).
+# Secrets: passwords are read from a local .env file (see .env).
 # Never commit the real .env to the repo.
 #
 # Usage:
@@ -32,13 +32,12 @@
 ########################################################################
 
 services:
-
   neo4j:
     image: neo4j:5.24-community
     container_name: bench-neo4j
     ports:
-      - "7474:7474"   # HTTP browser UI
-      - "7687:7687"   # Bolt
+      - "7474:7474" # HTTP browser UI
+      - "7687:7687" # Bolt
     environment:
       NEO4J_AUTH: "neo4j/${NEO4J_PASSWORD}"
       NEO4J_server_memory_heap_max__size: "256m"
@@ -60,9 +59,9 @@ services:
   memgraph:
     image: memgraph/memgraph:2.18.1
     container_name: bench-memgraph
-    command: ["--memory-limit=450"]   # MB, leaves headroom under the 512M container cap
+    command: ["--memory-limit=450"] # MB, leaves headroom under the 512M container cap
     ports:
-      - "7688:7687"   # Bolt (remapped host port; Neo4j already owns 7687)
+      - "7688:7687" # Bolt (remapped host port; Neo4j already owns 7687)
     environment:
       MEMGRAPH_USER: "memgraph"
       MEMGRAPH_PASSWORD: "${MEMGRAPH_PASSWORD}"
@@ -94,7 +93,8 @@ services:
     volumes:
       - arangodb_data:/var/lib/arangodb3
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8529/_api/version"]
+      test:
+        ["CMD", "wget", "-q", "--spider", "http://localhost:8529/_api/version"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -103,7 +103,7 @@ services:
     image: apache/age:release_PG16_1.5.0
     container_name: bench-age
     ports:
-      - "5433:5432"   # remapped to avoid clashing with a local Postgres
+      - "5433:5432" # remapped to avoid clashing with a local Postgres
     environment:
       POSTGRES_USER: "age"
       POSTGRES_PASSWORD: "${AGE_PASSWORD}"

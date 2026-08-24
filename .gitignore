@@ -221,6 +221,5 @@ __marimo__/
 .env*
 
 data/raw/*
-data/trimmed/*
 
 cognodb-db-credentials*

@@ -22,5 +22,4 @@ class Neo4jAdapter(CypherAdapter):
                 total = session.run(query).single()["total"]
             return {"stored_size_bytes": total, "memory_usage": "not observable"}
         except Exception:
-            # APOC may not be installed on the community image -- fall back
             return {"stored_size": "not observable (APOC not available)", "memory_usage": "not observable"}

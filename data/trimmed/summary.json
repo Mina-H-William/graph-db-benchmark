@@ -1,0 +1,11 @@
+{
+  "source": "https://snap.stanford.edu/data/soc-Pokec.html",
+  "node_count": 11250,
+  "relationship_count": 233031,
+  "profiles_matched": 11250,
+  "selection_method": "induced subgraph on top-degree nodes (in+out degree)",
+  "target_range": [
+    150000,
+    300000
+  ]
+}

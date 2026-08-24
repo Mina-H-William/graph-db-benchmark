@@ -1,0 +1,428 @@
+[
+  {
+    "platform": "neo4j",
+    "latencies": {
+      "hop_1": {
+        "label": "1-hop traversal",
+        "p50_ms": 1.229,
+        "p95_ms": 2.355,
+        "mean_ms": 2.055,
+        "min_ms": 1.071,
+        "max_ms": 69.515,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_2": {
+        "label": "2-hop traversal",
+        "p50_ms": 1.6,
+        "p95_ms": 2.925,
+        "mean_ms": 1.994,
+        "min_ms": 1.136,
+        "max_ms": 16.936,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_3": {
+        "label": "3-hop traversal",
+        "p50_ms": 4.644,
+        "p95_ms": 73.782,
+        "mean_ms": 14.625,
+        "min_ms": 1.53,
+        "max_ms": 253.251,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "point_lookup": {
+        "label": "point lookup",
+        "p50_ms": 1.709,
+        "p95_ms": 3.325,
+        "mean_ms": 2.436,
+        "min_ms": 1.125,
+        "max_ms": 47.779,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "filtered_lookup": {
+        "label": "filtered lookup",
+        "p50_ms": 3.515,
+        "p95_ms": 5.892,
+        "mean_ms": 3.785,
+        "min_ms": 2.504,
+        "max_ms": 7.789,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "aggregation": {
+        "label": "aggregation",
+        "p50_ms": 5.758,
+        "p95_ms": 45.838,
+        "mean_ms": 11.068,
+        "min_ms": 4.039,
+        "max_ms": 99.001,
+        "samples": 150,
+        "failed_iterations": 0
+      }
+    },
+    "mixed_workload": [
+      {
+        "concurrency": 1,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 9012,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 600.8,
+        "sample_errors": []
+      },
+      {
+        "concurrency": 10,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 9425,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 628.33,
+        "sample_errors": []
+      },
+      {
+        "concurrency": 40,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 10246,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 683.07,
+        "sample_errors": []
+      }
+    ],
+    "footprint": {
+      "stored_size": "not observable (APOC not available)",
+      "memory_usage": "not observable"
+    },
+    "status": "ok"
+  },
+  {
+    "platform": "memgraph",
+    "latencies": {
+      "hop_1": {
+        "label": "1-hop traversal",
+        "p50_ms": 1.031,
+        "p95_ms": 1.453,
+        "mean_ms": 1.078,
+        "min_ms": 0.863,
+        "max_ms": 2.539,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_2": {
+        "label": "2-hop traversal",
+        "p50_ms": 1.112,
+        "p95_ms": 1.949,
+        "mean_ms": 1.234,
+        "min_ms": 0.876,
+        "max_ms": 3.175,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_3": {
+        "label": "3-hop traversal",
+        "p50_ms": 3.196,
+        "p95_ms": 48.589,
+        "mean_ms": 10.99,
+        "min_ms": 1.125,
+        "max_ms": 121.508,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "point_lookup": {
+        "label": "point lookup",
+        "p50_ms": 1.116,
+        "p95_ms": 1.57,
+        "mean_ms": 1.239,
+        "min_ms": 0.931,
+        "max_ms": 10.306,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "filtered_lookup": {
+        "label": "filtered lookup",
+        "p50_ms": 2.687,
+        "p95_ms": 3.589,
+        "mean_ms": 2.6,
+        "min_ms": 1.885,
+        "max_ms": 4.864,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "aggregation": {
+        "label": "aggregation",
+        "p50_ms": 3.861,
+        "p95_ms": 19.721,
+        "mean_ms": 5.641,
+        "min_ms": 2.94,
+        "max_ms": 52.872,
+        "samples": 150,
+        "failed_iterations": 0
+      }
+    },
+    "mixed_workload": [
+      {
+        "concurrency": 1,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 13693,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 912.87,
+        "sample_errors": []
+      },
+      {
+        "concurrency": 10,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 16062,
+        "total_errors": 2,
+        "throughput_ops_per_sec": 1070.8,
+        "sample_errors": [
+          "{neo4j_code: Memgraph.TransientError.MemgraphError.MemgraphError} {message: Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished}",
+          "{neo4j_code: Memgraph.TransientError.MemgraphError.MemgraphError} {message: Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished}"
+        ]
+      },
+      {
+        "concurrency": 40,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 3415,
+        "total_errors": 7,
+        "throughput_ops_per_sec": 227.67,
+        "sample_errors": [
+          "{neo4j_code: Memgraph.TransientError.MemgraphError.MemgraphError} {message: Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished}",
+          "{neo4j_code: Memgraph.TransientError.MemgraphError.MemgraphError} {message: Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished}",
+          "{neo4j_code: Memgraph.TransientError.MemgraphError.MemgraphError} {message: Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished}",
+          "{neo4j_code: Memgraph.TransientError.MemgraphError.MemgraphError} {message: Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished}",
+          "{neo4j_code: Memgraph.TransientError.MemgraphError.MemgraphError} {message: Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. Cannot resolve conflicting transactions. You can retry this transaction when the conflicting transaction is finished}"
+        ]
+      }
+    ],
+    "footprint": {
+      "storage_info": {
+        "name": "memgraph",
+        "vertex_count": 11250,
+        "edge_count": 233031,
+        "average_degree": 41.427733333333336,
+        "vm_max_map_count": 262144,
+        "memory_res": "182.35MiB",
+        "peak_memory_res": "193.44MiB",
+        "unreleased_delta_objects": 2,
+        "disk_usage": "72.42MiB",
+        "memory_tracked": "86.96MiB",
+        "allocation_limit": "450.00MiB",
+        "global_isolation_level": "SNAPSHOT_ISOLATION",
+        "session_isolation_level": "",
+        "next_session_isolation_level": "",
+        "storage_mode": "IN_MEMORY_TRANSACTIONAL"
+      }
+    },
+    "status": "ok"
+  },
+  {
+    "platform": "cognodb",
+    "latencies": {
+      "hop_1": {
+        "label": "1-hop traversal",
+        "p50_ms": 129.934,
+        "p95_ms": 131.177,
+        "mean_ms": 130.09,
+        "min_ms": 128.873,
+        "max_ms": 133.692,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_2": {
+        "label": "2-hop traversal",
+        "p50_ms": 132.563,
+        "p95_ms": 153.474,
+        "mean_ms": 135.792,
+        "min_ms": 129.567,
+        "max_ms": 199.152,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_3": {
+        "label": "3-hop traversal",
+        "p50_ms": 176.844,
+        "p95_ms": 1965.046,
+        "mean_ms": 605.161,
+        "min_ms": 128.648,
+        "max_ms": 7700.485,
+        "samples": 147,
+        "failed_iterations": 3
+      },
+      "point_lookup": {
+        "label": "point lookup",
+        "p50_ms": 129.431,
+        "p95_ms": 132.563,
+        "mean_ms": 129.799,
+        "min_ms": 128.527,
+        "max_ms": 133.37,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "filtered_lookup": {
+        "label": "filtered lookup",
+        "p50_ms": 140.753,
+        "p95_ms": 144.605,
+        "mean_ms": 140.94,
+        "min_ms": 138.167,
+        "max_ms": 151.778,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "aggregation": {
+        "label": "aggregation",
+        "p50_ms": 146.3,
+        "p95_ms": 150.046,
+        "mean_ms": 147.238,
+        "min_ms": 144.457,
+        "max_ms": 199.344,
+        "samples": 150,
+        "failed_iterations": 0
+      }
+    },
+    "mixed_workload": [
+      {
+        "concurrency": 1,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 110,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 7.33,
+        "sample_errors": []
+      },
+      {
+        "concurrency": 10,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 1079,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 71.93,
+        "sample_errors": []
+      },
+      {
+        "concurrency": 40,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 3452,
+        "total_errors": 17,
+        "throughput_ops_per_sec": 230.13,
+        "sample_errors": [
+          "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 12504 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 12504 modified concurrently}",
+          "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 21253 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 21253 modified concurrently}",
+          "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 11258 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 11258 modified concurrently}",
+          "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 21253 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 21253 modified concurrently}",
+          "{neo4j_code: Neo.TransientError.Transaction.DeadlockDetected} {message: commit transaction: transaction conflict (retryable): node 20007 modified concurrently} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. commit transaction: transaction conflict (retryable): node 20007 modified concurrently}"
+        ]
+      }
+    ],
+    "footprint": {
+      "stored_size": "not observable",
+      "memory_usage": "not observable"
+    },
+    "status": "ok"
+  },
+  {
+    "platform": "arangodb",
+    "latencies": {
+      "hop_1": {
+        "label": "1-hop traversal",
+        "p50_ms": 50.019,
+        "p95_ms": 59.438,
+        "mean_ms": 50.528,
+        "min_ms": 48.531,
+        "max_ms": 60.444,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_2": {
+        "label": "2-hop traversal",
+        "p50_ms": 50.837,
+        "p95_ms": 62.097,
+        "mean_ms": 52.163,
+        "min_ms": 44.495,
+        "max_ms": 78.248,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "hop_3": {
+        "label": "3-hop traversal",
+        "p50_ms": 91.821,
+        "p95_ms": 957.269,
+        "mean_ms": 270.108,
+        "min_ms": 13.954,
+        "max_ms": 3774.722,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "point_lookup": {
+        "label": "point lookup",
+        "p50_ms": 1.383,
+        "p95_ms": 2.026,
+        "mean_ms": 1.455,
+        "min_ms": 1.272,
+        "max_ms": 2.911,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "filtered_lookup": {
+        "label": "filtered lookup",
+        "p50_ms": 50.014,
+        "p95_ms": 59.717,
+        "mean_ms": 50.597,
+        "min_ms": 48.918,
+        "max_ms": 60.351,
+        "samples": 150,
+        "failed_iterations": 0
+      },
+      "aggregation": {
+        "label": "aggregation",
+        "p50_ms": 50.053,
+        "p95_ms": 58.427,
+        "mean_ms": 50.589,
+        "min_ms": 47.78,
+        "max_ms": 60.454,
+        "samples": 150,
+        "failed_iterations": 0
+      }
+    },
+    "mixed_workload": [
+      {
+        "concurrency": 1,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 1072,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 71.47,
+        "sample_errors": []
+      },
+      {
+        "concurrency": 10,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 6467,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 431.13,
+        "sample_errors": []
+      },
+      {
+        "concurrency": 40,
+        "duration_seconds": 15,
+        "write_ratio": 0.2,
+        "total_ops": 6862,
+        "total_errors": 0,
+        "throughput_ops_per_sec": 457.47,
+        "sample_errors": []
+      }
+    ],
+    "footprint": {
+      "documents_size_bytes": "not observable",
+      "memory_usage": "not observable"
+    },
+    "status": "ok"
+  }
+]
