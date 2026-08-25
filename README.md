@@ -24,7 +24,7 @@ platforms; see the Apache AGE caveat below for why it's excluded).
 ### 1. Clone the repo and set up Python
 
 ```bash
-git clone <your-repo-url>
+git clone <repo-url>
 cd graph-db-benchmark
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ### 2. Set up your CognoDB Cloud instance
 
-1. Go to https://console.cognodb.com/signup and create a free account (no credit card required).
+1. Go to https://console.cognodb.com/signup and create a free account.
 2. Create a free (c0) instance, pick a region.
 3. **Copy the connection URI and password immediately** the password is shown exactly once. You'll get:
    - A URI like `bolt+s://<instance-id>.databases.cognodb.cloud`
